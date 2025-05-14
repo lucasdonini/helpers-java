@@ -279,7 +279,7 @@ public class Matrix {
         return new int[]{m.length, m[0].length};
     }
 
-    public int[][] sum(int[][] m1, int[][] m2) {
+    public static int[][] sum(int[][] m1, int[][] m2) {
         int[][] r = new int[m1.length][m1[0].length];
         for (int i = 0; i < m1.length; i++) {
             for (int j = 0; j < m1[i].length; j++) {
@@ -289,7 +289,7 @@ public class Matrix {
         return r;
     }
 
-    public double[][] sum(double[][] m1, double[][] m2) {
+    public static double[][] sum(double[][] m1, double[][] m2) {
         double[][] r = new double[m1.length][m1[0].length];
         for (int i = 0; i < m1.length; i++) {
             for (int j = 0; j < m1[i].length; j++) {
@@ -299,7 +299,7 @@ public class Matrix {
         return r;
     }
 
-    public int[][] sumAll(int[][][] m) {
+    public static int[][] sumAll(int[][][] m) {
         int[][] r = new int[m[0].length][m[0][0].length];
         for (int[][] i : m) {
             r = sum(r, i);
@@ -307,7 +307,7 @@ public class Matrix {
         return r;
     }
 
-    public double[][] sumAll(double[][][] m) {
+    public static double[][] sumAll(double[][][] m) {
         double[][] r = new double[m[0].length][m[0][0].length];
         for (double[][] i : m) {
             r = sum(r, i);
