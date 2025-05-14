@@ -236,4 +236,82 @@ public class Matrix {
         }
         return true;
     }
+
+    public static boolean isNull(int[][] m) {
+        for (int[] i : m) {
+            for (int j : i) {
+                if (j != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean isNull(double[][] m) {
+        for (double[] i : m) {
+            for (double j : i) {
+                if (j != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static int[] size(int[][] m) {
+        return new int[]{m.length, m[0].length};
+    }
+
+    public static int[] size(double[][] m) {
+        return new int[]{m.length, m[0].length};
+    }
+
+    public static int[] size(String[][] m) {
+        return new int[]{m.length, m[0].length};
+    }
+
+    public static int[] size(char[][] m) {
+        return new int[]{m.length, m[0].length};
+    }
+
+    public static int[] size(boolean[][] m) {
+        return new int[]{m.length, m[0].length};
+    }
+
+    public int[][] sum(int[][] m1, int[][] m2) {
+        int[][] r = new int[m1.length][m1[0].length];
+        for (int i = 0; i < m1.length; i++) {
+            for (int j = 0; j < m1[i].length; j++) {
+                r[i][j] = m1[i][j] + m2[i][j];
+            }
+        }
+        return r;
+    }
+
+    public double[][] sum(double[][] m1, double[][] m2) {
+        double[][] r = new double[m1.length][m1[0].length];
+        for (int i = 0; i < m1.length; i++) {
+            for (int j = 0; j < m1[i].length; j++) {
+                r[i][j] = m1[i][j] + m2[i][j];
+            }
+        }
+        return r;
+    }
+
+    public int[][] sumAll(int[][][] m) {
+        int[][] r = new int[m[0].length][m[0][0].length];
+        for (int[][] i : m) {
+            r = sum(r, i);
+        }
+        return r;
+    }
+
+    public double[][] sumAll(double[][][] m) {
+        double[][] r = new double[m[0].length][m[0][0].length];
+        for (double[][] i : m) {
+            r = sum(r, i);
+        }
+        return r;
+    }
 }
