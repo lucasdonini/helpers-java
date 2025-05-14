@@ -1,6 +1,7 @@
 package methods;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Matrix {
     public static String toString(int[][] m) {
@@ -311,6 +312,162 @@ public class Matrix {
         double[][] r = new double[m[0].length][m[0][0].length];
         for (double[][] i : m) {
             r = sum(r, i);
+        }
+        return r;
+    }
+
+    public static double[][] random() {
+        Random rand = new Random();
+        double[][] m = new double[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                m[i][j] = rand.nextDouble(100);
+            }
+        }
+        return m;
+    }
+
+    public static double[][] random(int[] size) {
+        Random rand = new Random();
+        double[][] m = new double[size[0]][size[1]];
+        for (int i = 0; i < size[0]; i++) {
+            for (int j = 0; j < size[1]; j++) {
+                m[i][j] = rand.nextDouble(100);
+            }
+        }
+        return m;
+    }
+
+    public static double[][] random(double bound) {
+        Random rand = new Random();
+        double[][] m = new double[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                m[i][j] = rand.nextDouble(bound);
+            }
+        }
+        return m;
+    }
+
+    public static double[][] random(double origin, double bound) {
+        Random rand = new Random();
+        double[][] m = new double[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                m[i][j] = rand.nextDouble(origin, bound);
+            }
+        }
+        return m;
+    }
+
+    public static double[][] random(int[] size, double bound) {
+        Random rand = new Random();
+        double[][] m = new double[size[0]][size[1]];
+        for (int i = 0; i < size[0]; i++) {
+            for (int j = 0; j < size[1]; j++) {
+                m[i][j] = rand.nextDouble(bound);
+            }
+        }
+        return m;
+    }
+
+    public static double[][] random(int[] size, double origin, double bound) {
+        Random rand = new Random();
+        double[][] m = new double[size[0]][size[1]];
+        for (int i = 0; i < size[0]; i++) {
+            for (int j = 0; j < size[1]; j++) {
+                m[i][j] = rand.nextDouble(origin, bound);
+            }
+        }
+        return m;
+    }
+
+    public static int[][] trunc(double[][] m) {
+        int[][] r = new int[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                r[i][j] = (int) m[i][j];
+            }
+        }
+        return r;
+    }
+
+    public static int[][] round(double[][] m) {
+        int[][] r = new int[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                r[i][j] = (int) Math.round(m[i][j]);
+            }
+        }
+        return r;
+    }
+
+    public static int[][] ceil(double[][] m) {
+        int[][] r = new int[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                r[i][j] = (int) Math.ceil(m[i][j]);
+            }
+        }
+        return r;
+    }
+
+    public static int[][] abs(int[][] m) {
+        int[][] r = new int[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                r[i][j] = Math.abs(m[i][j]);
+            }
+        }
+        return r;
+    }
+
+    public static double[][] abs(double[][] m) {
+        double[][] r = new double[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                r[i][j] = Math.abs(m[i][j]);
+            }
+        }
+        return r;
+    }
+
+    public static int[][] transpose(int[][] m) {
+        int[][] r = new int[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                r[i][j] = m[j][i];
+            }
+        }
+        return r;
+    }
+
+    public static double[][] transpose(double[][] m) {
+        double[][] r = new double[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                r[i][j] = m[j][i];
+            }
+        }
+        return r;
+    }
+
+    public static String[][] transpose(String[][] m) {
+        String[][] r = new String[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                r[i][j] = m[j][i];
+            }
+        }
+        return r;
+    }
+
+    public static char[][] transpose(char[][] m) {
+        char[][] r = new char[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                r[i][j] = m[j][i];
+            }
         }
         return r;
     }
