@@ -472,7 +472,7 @@ public class Matrix {
         return r;
     }
 
-    public int[][] product(int[][] m, double d) {
+    public static int[][] product(int[][] m, double d) {
         int[][] r = new int[m.length][m[0].length];
         for (int i = 0; i <  m.length; i++) {
             for (int j = 0; j < m[0].length; j++) {
@@ -482,7 +482,7 @@ public class Matrix {
         return r;
     }
 
-    public double[][] product(double[][] m, double d) {
+    public static double[][] product(double[][] m, double d) {
         double[][] r = new double[m.length][m[0].length];
         for (int i = 0; i <  m.length; i++) {
             for (int j = 0; j < m[0].length; j++) {
