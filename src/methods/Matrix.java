@@ -472,23 +472,77 @@ public class Matrix {
         return r;
     }
 
-    public static int[][] product(int[][] m, double d) {
+    public static int[][] prod(int[][] m, double d) {
         int[][] r = new int[m.length][m[0].length];
-        for (int i = 0; i <  m.length; i++) {
+        for (int i = 0; i < m.length; i++) {
             for (int j = 0; j < m[0].length; j++) {
-                r[i][j] = (int) (m[i][j]*d);
+                r[i][j] = (int) (m[i][j] * d);
             }
         }
         return r;
     }
 
-    public static double[][] product(double[][] m, double d) {
+    public static double[][] prod(double[][] m, double d) {
         double[][] r = new double[m.length][m[0].length];
-        for (int i = 0; i <  m.length; i++) {
+        for (int i = 0; i < m.length; i++) {
             for (int j = 0; j < m[0].length; j++) {
-                r[i][j] = m[i][j]*d;
+                r[i][j] = m[i][j] * d;
             }
         }
         return r;
+    }
+
+    public static int[][] prod(int[][] m, int[][] n) {
+        int[][] mn = new int[m.length][n[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < n[0].length; j++) {
+                int sum = 0;
+                for (int k = 0; k < n.length; k++) {
+                    sum += m[i][k] * n[k][j];
+                }
+                mn[i][j] = sum;
+            }
+        }
+        return mn;
+
+        /* Código Python original
+    def prod(m, n):
+        # mn[i][j] = m[i][k]*n[k][j] + m[i][k]*n[k][j] + m[i][k]*n[k][j]
+        # k =               0        ->       1        ->       2
+        produto = [[0, 0], [0, 0]]
+        for i in range(len(m)):
+            for j in range(len(n[0])):
+                soma = 0
+                for k in range(len(n)):
+                    soma += m[i][k]*n[k][j]
+                produto[i][j] = soma
+        return produto
+
+
+m = [[1, 2, 3], [4, 5, 6]]
+n = [[7, 8], [9, 10], [11, 12]]
+mn = [[0, 0], [0, 0]]
+
+mn[0][0] = m[0][0]*n[0][0] + m[0][1]*n[1][0] + m[0][2]*n[2][0]
+mn[0][1] = m[0][0]*n[0][1] + m[0][1]*n[1][1] + m[0][2]*n[2][1]
+mn[1][0] = m[1][0]*n[0][0] + m[1][1]*n[1][0] + m[1][2]*n[2][0]
+mn[1][1] = m[1][0]*n[0][1] + m[1][1]*n[1][1] + m[1][2]*n[2][1]
+
+print(prod(m, n))
+         */
+    }
+
+    public static double[][] prod(double[][] m, double[][] n) {
+        double[][] mn = new double[m.length][n[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < n[0].length; j++) {
+                double sum = 0;
+                for (int k = 0; k < n.length; k++) {
+                    sum += m[i][k] * n[k][j];
+                }
+                mn[i][j] = sum;
+            }
+        }
+        return mn;
     }
 }
