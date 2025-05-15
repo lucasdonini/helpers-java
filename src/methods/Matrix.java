@@ -402,6 +402,16 @@ public class Matrix {
         return r;
     }
 
+    public static double[][] round(double[][] m, int dp) {
+        double[][] r = new double[m.length][m[0].length];
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                r[i][j] = Math.round(m[i][j]*Math.pow(10, dp)) / Math.pow(10, dp);
+            }
+        }
+        return r;
+    }
+
     public static int[][] ceil(double[][] m) {
         int[][] r = new int[m.length][m[0].length];
         for (int i = 0; i < m.length; i++) {
@@ -506,29 +516,29 @@ public class Matrix {
         return mn;
 
         /* Código Python original
-    def prod(m, n):
-        # mn[i][j] = m[i][k]*n[k][j] + m[i][k]*n[k][j] + m[i][k]*n[k][j]
-        # k =               0        ->       1        ->       2
-        produto = [[0, 0], [0, 0]]
-        for i in range(len(m)):
-            for j in range(len(n[0])):
-                soma = 0
-                for k in range(len(n)):
-                    soma += m[i][k]*n[k][j]
-                produto[i][j] = soma
-        return produto
+            def prod(m, n):
+                # mn[i][j] = m[i][k]*n[k][j] + m[i][k]*n[k][j] + m[i][k]*n[k][j]
+                # k =               0        ->       1        ->       2
+                produto = [[0, 0], [0, 0]]
+                for i in range(len(m)):
+                    for j in range(len(n[0])):
+                        soma = 0
+                        for k in range(len(n)):
+                            soma += m[i][k]*n[k][j]
+                        produto[i][j] = soma
+                return produto
 
 
-m = [[1, 2, 3], [4, 5, 6]]
-n = [[7, 8], [9, 10], [11, 12]]
-mn = [[0, 0], [0, 0]]
+            m = [[1, 2, 3], [4, 5, 6]]
+            n = [[7, 8], [9, 10], [11, 12]]
+            mn = [[0, 0], [0, 0]]
 
-mn[0][0] = m[0][0]*n[0][0] + m[0][1]*n[1][0] + m[0][2]*n[2][0]
-mn[0][1] = m[0][0]*n[0][1] + m[0][1]*n[1][1] + m[0][2]*n[2][1]
-mn[1][0] = m[1][0]*n[0][0] + m[1][1]*n[1][0] + m[1][2]*n[2][0]
-mn[1][1] = m[1][0]*n[0][1] + m[1][1]*n[1][1] + m[1][2]*n[2][1]
+            mn[0][0] = m[0][0]*n[0][0] + m[0][1]*n[1][0] + m[0][2]*n[2][0]
+            mn[0][1] = m[0][0]*n[0][1] + m[0][1]*n[1][1] + m[0][2]*n[2][1]
+            mn[1][0] = m[1][0]*n[0][0] + m[1][1]*n[1][0] + m[1][2]*n[2][0]
+            mn[1][1] = m[1][0]*n[0][1] + m[1][1]*n[1][1] + m[1][2]*n[2][1]
 
-print(prod(m, n))
+            print(prod(m, n))
          */
     }
 
