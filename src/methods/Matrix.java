@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Matrix {
+    // Printing
     public static String toString(int[][] m) {
         String s = "";
         for (int[] i : m) {
@@ -44,6 +45,8 @@ public class Matrix {
         return s;
     }
 
+
+    // Arithmetics
     public static int[] axisMean(int[][] m, int axis) {
         int[] mean;
         if (axis == 0) {
@@ -144,142 +147,6 @@ public class Matrix {
         return sum;
     }
 
-    public static boolean isSymmetrical(int[][] m) {
-        try {
-            for (int i = 0; i < m.length; i++) {
-                for (int j = 0; j < m[i].length; j++) {
-                    if (m[j][i] != m[i][j]) {
-                        return false;
-                    }
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean isSymmetrical(double[][] m) {
-        try {
-            for (int i = 0; i < m.length; i++) {
-                for (int j = 0; j < m[i].length; j++) {
-                    if (m[j][i] != m[i][j]) {
-                        return false;
-                    }
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean isDiagonal(int[][] m) {
-        try {
-            for (int i = 0; i < m.length; i++) {
-                for (int j = 0; j < m[i].length; j++) {
-                    if (i != j && m[i][j] != 0) {
-                        return false;
-                    }
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean isDiagonal(double[][] m) {
-        try {
-            for (int i = 0; i < m.length; i++) {
-                for (int j = 0; j < m[i].length; j++) {
-                    if (i != j && m[i][j] != 0) {
-                        return false;
-                    }
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean isIdentity(int[][] m) {
-        try {
-            for (int i = 0; i < m.length; i++) {
-                for (int j = 0; j < m[i].length; j++) {
-                    if (i != j && m[i][j] != 0) {
-                        return false;
-                    } else if (i == j && m[i][j] != 1) {
-                        return false;
-                    }
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean isIdentity(double[][] m) {
-        try {
-            for (int i = 0; i < m.length; i++) {
-                for (int j = 0; j < m[i].length; j++) {
-                    if (i != j && m[i][j] != 0) {
-                        return false;
-                    } else if (i == j && m[i][j] != 1) {
-                        return false;
-                    }
-                }
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean isNull(int[][] m) {
-        for (int[] i : m) {
-            for (int j : i) {
-                if (j != 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    public static boolean isNull(double[][] m) {
-        for (double[] i : m) {
-            for (double j : i) {
-                if (j != 0) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
-    public static int[] size(int[][] m) {
-        return new int[]{m.length, m[0].length};
-    }
-
-    public static int[] size(double[][] m) {
-        return new int[]{m.length, m[0].length};
-    }
-
-    public static int[] size(String[][] m) {
-        return new int[]{m.length, m[0].length};
-    }
-
-    public static int[] size(char[][] m) {
-        return new int[]{m.length, m[0].length};
-    }
-
-    public static int[] size(boolean[][] m) {
-        return new int[]{m.length, m[0].length};
-    }
-
     public static int[][] sum(int[][] m1, int[][] m2) {
         int[][] r = new int[m1.length][m1[0].length];
         for (int i = 0; i < m1.length; i++) {
@@ -316,72 +183,6 @@ public class Matrix {
         return r;
     }
 
-    public static double[][] random() {
-        Random rand = new Random();
-        double[][] m = new double[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                m[i][j] = rand.nextDouble(100);
-            }
-        }
-        return m;
-    }
-
-    public static double[][] random(int[] size) {
-        Random rand = new Random();
-        double[][] m = new double[size[0]][size[1]];
-        for (int i = 0; i < size[0]; i++) {
-            for (int j = 0; j < size[1]; j++) {
-                m[i][j] = rand.nextDouble(100);
-            }
-        }
-        return m;
-    }
-
-    public static double[][] random(double bound) {
-        Random rand = new Random();
-        double[][] m = new double[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                m[i][j] = rand.nextDouble(bound);
-            }
-        }
-        return m;
-    }
-
-    public static double[][] random(double origin, double bound) {
-        Random rand = new Random();
-        double[][] m = new double[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                m[i][j] = rand.nextDouble(origin, bound);
-            }
-        }
-        return m;
-    }
-
-    public static double[][] random(int[] size, double bound) {
-        Random rand = new Random();
-        double[][] m = new double[size[0]][size[1]];
-        for (int i = 0; i < size[0]; i++) {
-            for (int j = 0; j < size[1]; j++) {
-                m[i][j] = rand.nextDouble(bound);
-            }
-        }
-        return m;
-    }
-
-    public static double[][] random(int[] size, double origin, double bound) {
-        Random rand = new Random();
-        double[][] m = new double[size[0]][size[1]];
-        for (int i = 0; i < size[0]; i++) {
-            for (int j = 0; j < size[1]; j++) {
-                m[i][j] = rand.nextDouble(origin, bound);
-            }
-        }
-        return m;
-    }
-
     public static int[][] trunc(double[][] m) {
         int[][] r = new int[m.length][m[0].length];
         for (int i = 0; i < m.length; i++) {
@@ -406,7 +207,7 @@ public class Matrix {
         double[][] r = new double[m.length][m[0].length];
         for (int i = 0; i < m.length; i++) {
             for (int j = 0; j < m[i].length; j++) {
-                r[i][j] = Math.round(m[i][j]*Math.pow(10, dp)) / Math.pow(10, dp);
+                r[i][j] = Math.round(m[i][j] * Math.pow(10, dp)) / Math.pow(10, dp);
             }
         }
         return r;
@@ -554,5 +355,242 @@ public class Matrix {
             }
         }
         return mn;
+    }
+
+
+    // Property Verification
+    public static boolean isSymmetrical(int[][] m) {
+        try {
+            for (int i = 0; i < m.length; i++) {
+                for (int j = 0; j < m[i].length; j++) {
+                    if (m[j][i] != m[i][j]) {
+                        return false;
+                    }
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isSymmetrical(double[][] m) {
+        try {
+            for (int i = 0; i < m.length; i++) {
+                for (int j = 0; j < m[i].length; j++) {
+                    if (m[j][i] != m[i][j]) {
+                        return false;
+                    }
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isDiagonal(int[][] m) {
+        try {
+            for (int i = 0; i < m.length; i++) {
+                for (int j = 0; j < m[i].length; j++) {
+                    if (i != j && m[i][j] != 0) {
+                        return false;
+                    }
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isDiagonal(double[][] m) {
+        try {
+            for (int i = 0; i < m.length; i++) {
+                for (int j = 0; j < m[i].length; j++) {
+                    if (i != j && m[i][j] != 0) {
+                        return false;
+                    }
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isIdentity(int[][] m) {
+        try {
+            for (int i = 0; i < m.length; i++) {
+                for (int j = 0; j < m[i].length; j++) {
+                    if (i != j && m[i][j] != 0) {
+                        return false;
+                    } else if (i == j && m[i][j] != 1) {
+                        return false;
+                    }
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isIdentity(double[][] m) {
+        try {
+            for (int i = 0; i < m.length; i++) {
+                for (int j = 0; j < m[i].length; j++) {
+                    if (i != j && m[i][j] != 0) {
+                        return false;
+                    } else if (i == j && m[i][j] != 1) {
+                        return false;
+                    }
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isNull(int[][] m) {
+        for (int[] i : m) {
+            for (int j : i) {
+                if (j != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean isNull(double[][] m) {
+        for (double[] i : m) {
+            for (double j : i) {
+                if (j != 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static int[] size(int[][] m) {
+        return new int[]{m.length, m[0].length};
+    }
+
+    public static int[] size(double[][] m) {
+        return new int[]{m.length, m[0].length};
+    }
+
+    public static int[] size(String[][] m) {
+        return new int[]{m.length, m[0].length};
+    }
+
+    public static int[] size(char[][] m) {
+        return new int[]{m.length, m[0].length};
+    }
+
+    public static int[] size(boolean[][] m) {
+        return new int[]{m.length, m[0].length};
+    }
+
+    public static boolean isSquare(int[][] m) {
+        int[] s = size(m);
+        return s[0] == s[1];
+    }
+
+    public static boolean isSquare(double[][] m) {
+        int[] s = size(m);
+        return s[0] == s[1];
+    }
+
+    public static boolean isSquare(char[][] m) {
+        int[] s = size(m);
+        return s[0] == s[1];
+    }
+
+    public static boolean isSquare(String[][] m) {
+        int[] s = size(m);
+        return s[0] == s[1];
+    }
+
+
+    // Randomizing
+    public static double[][] random() {
+        Random rand = new Random();
+        double[][] m = new double[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                m[i][j] = rand.nextDouble(100);
+            }
+        }
+        return m;
+    }
+
+    public static double[][] random(int[] size) {
+        Random rand = new Random();
+        double[][] m = new double[size[0]][size[1]];
+        for (int i = 0; i < size[0]; i++) {
+            for (int j = 0; j < size[1]; j++) {
+                m[i][j] = rand.nextDouble(100);
+            }
+        }
+        return m;
+    }
+
+    public static double[][] random(double bound) {
+        Random rand = new Random();
+        double[][] m = new double[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                m[i][j] = rand.nextDouble(bound);
+            }
+        }
+        return m;
+    }
+
+    public static double[][] random(double origin, double bound) {
+        Random rand = new Random();
+        double[][] m = new double[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                m[i][j] = rand.nextDouble(origin, bound);
+            }
+        }
+        return m;
+    }
+
+    public static double[][] random(int[] size, double bound) {
+        Random rand = new Random();
+        double[][] m = new double[size[0]][size[1]];
+        for (int i = 0; i < size[0]; i++) {
+            for (int j = 0; j < size[1]; j++) {
+                m[i][j] = rand.nextDouble(bound);
+            }
+        }
+        return m;
+    }
+
+    public static double[][] random(int[] size, double origin, double bound) {
+        Random rand = new Random();
+        double[][] m = new double[size[0]][size[1]];
+        for (int i = 0; i < size[0]; i++) {
+            for (int j = 0; j < size[1]; j++) {
+                m[i][j] = rand.nextDouble(origin, bound);
+            }
+        }
+        return m;
+    }
+
+    public static int[][] randInt(int[] size) {
+        Random rand = new Random();
+        int[][] m = new int[size[0]][size[1]];
+        for (int i = 0; i < size[0]; i++) {
+            for (int j = 0; j < size[1]; j++) {
+                m[i][j] = rand.nextInt(100);
+            }
+        }
+        return m;
     }
 }
