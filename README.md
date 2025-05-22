@@ -7,6 +7,7 @@
    * Clicar em ARTIFACTS
    * Clicar no +
    * Selecionar JAR
+   * Escolha FROM MODULES WITH DEPENDENCIES
    * Achar o Projeto
    * Clicar OK
    * Marcar a opção "Include in project build"
@@ -28,5 +29,3 @@
 
 ## E se eu quiser Ampliar o Projeto?
 Basta rebuildar o projeto helpers
-
-> link do chat com o GPT: https://chatgpt.com/c/681d19be-a3f0-8005-ad4b-ad78d3237e93
