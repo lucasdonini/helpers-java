@@ -8,7 +8,6 @@ Biblioteca não profissional de utilitários para Java, desenvolvida por Lucas K
 Você pode baixar o arquivo `.jar` mais recente na seção **Releases** deste repositório:
 
 ➡️ [Clique aqui para acessar os Releases](https://github.com/lucasdonini/helpers-java/releases)
-> Substitua o link acima pelo correto após publicar a primeira release.
 
 ---
 
