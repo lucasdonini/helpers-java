@@ -111,12 +111,12 @@ public class Color {
     }
 
     //Métodos mistos
-    public static String negative(String txt) {
-        return bold(inWhiteBg(inBlack(txt)));
+    public static String negative(String value) {
+        return bold(inWhiteBg(inBlack(value)));
     }
 
-    public static String negative(int x) {
-        return bold(inWhiteBg(inBlack(String.valueOf(x))));
+    public static String negative(int value) {
+        return bold(inWhiteBg(inBlack(String.valueOf(value))));
     }
 
 }
