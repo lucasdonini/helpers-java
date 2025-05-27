@@ -15,3 +15,7 @@ e este projeto segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 
 ### Obsoleto:
 - `Color.negative(int value)`
+
+## [v1.0.2] - 2025-05-27
+### Novidades:
+- Agora a documentação nos padrões javadocs está disponível online! clique [aqui](https://lucasdonini.github.io/helpers-java/docs/index.html) para acessar a página.
