@@ -2,7 +2,22 @@ package methods;
 
 import java.util.Arrays;
 
+/**
+ * Classe que fornece métodos para validação de documentos brasileiros.
+ * Atualmente suporta validação de CPF (Cadastro de Pessoas Físicas).
+ */
 public class Documents {
+    /**
+     * Verifica se um CPF é válido.
+     * <p>
+     * Este método realiza a validação de um CPF seguindo o algoritmo oficial:
+     * 1. Remove caracteres não numéricos (como pontos, traços e letras)
+     * 2. Verifica se o CPF possui 11 dígitos
+     * 3. Calcula os dígitos verificadores e compara com os dígitos fornecidos
+     *
+     * @param cpf String contendo o CPF a ser validado (pode conter pontuação)
+     * @return true se o CPF for válido, false caso contrário
+     */
     public static boolean verifyCpf(String cpf) {
         //variables and arrays
         cpf = cpf.replaceAll("[-. A-Za-z]", "");
@@ -38,6 +53,16 @@ public class Documents {
 
         return verifier1 == digits[9] && verifier2 == digits[10];
     }
+
+    /**
+     * Verifica se um CPF é válido.
+     * <p>
+     * Este método é uma sobrecarga que aceita o CPF como um número longo.
+     * Converte o número para string e utiliza o método {@link #verifyCpf(String)}.
+     *
+     * @param cpf Número longo contendo o CPF a ser validado (sem pontuação)
+     * @return true se o CPF for válido, false caso contrário
+     */
     public static boolean verifyCpf(long cpf) {
         return verifyCpf(String.valueOf(cpf));
     }
