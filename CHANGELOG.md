@@ -9,7 +9,7 @@ e este projeto segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ### Novidades:
 - Nenhuma, é a primeira versão. Leia o [README](README.md) se quiser saber mais.
 
-## [v1.0.1] - 2025-05-26
+## [v1.0.1] - 2025-05-27
 ### Alterado:
 - A documentação agora segue o padrão javadocs, não é mais parte do README.md
 
