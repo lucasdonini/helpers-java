@@ -19,75 +19,18 @@ public class Matrix {
      */
 
     /**
-     * Converte uma matriz de inteiros em uma representação de string.
+     * Converte uma matriz em uma representação de string.
      *
-     * @param m A matriz de inteiros a ser convertida
-     * @return Uma string representando a matriz, com cada linha em uma nova linha
+     * @param m A matriz a ser convertida
+     * @return Uma string representando a matriz
      */
-    public static String toString(int[][] m) {
-        String s = "";
-        for (int[] i : m) {
-            s = s.concat(Arrays.toString(i) + "\n");
+    public static <T> String toString(T[][] m) {
+        StringBuilder sb = new StringBuilder();
+        for (T[] i : m) {
+            sb.append(Arrays.toString(i)).append('\n');
         }
-        return s;
+        return sb.toString();
     }
-
-    /**
-     * Converte uma matriz de números de ponto flutuante em uma representação de string.
-     *
-     * @param m A matriz de doubles a ser convertida
-     * @return Uma string representando a matriz, com cada linha em uma nova linha
-     */
-    public static String toString(double[][] m) {
-        String s = "";
-        for (double[] d : m) {
-            s = s.concat(Arrays.toString(d) + "\n");
-        }
-        return s;
-    }
-
-    /**
-     * Converte uma matriz de caracteres em uma representação de string.
-     *
-     * @param m A matriz de caracteres a ser convertida
-     * @return Uma string representando a matriz, com cada linha em uma nova linha
-     */
-    public static String toString(char[][] m) {
-        String s = "";
-        for (char[] c : m) {
-            s = s.concat(Arrays.toString(c) + "\n");
-        }
-        return s;
-    }
-
-    /**
-     * Converte uma matriz de strings em uma representação de string.
-     *
-     * @param m A matriz de strings a ser convertida
-     * @return Uma string representando a matriz, com cada linha em uma nova linha
-     */
-    public static String toString(String[][] m) {
-        String s = "";
-        for (String[] st : m) {
-            s = s.concat(Arrays.toString(st) + "\n");
-        }
-        return s;
-    }
-
-    /**
-     * Converte uma matriz de booleanos em uma representação de string.
-     *
-     * @param m A matriz de booleanos a ser convertida
-     * @return Uma string representando a matriz, com cada linha em uma nova linha
-     */
-    public static String toString(boolean[][] m) {
-        String s = "";
-        for (boolean[] b : m) {
-            s = s.concat(Arrays.toString(b) + "\n");
-        }
-        return s;
-    }
-
 
     /**
      * Seção de métodos para operações aritméticas com matrizes
