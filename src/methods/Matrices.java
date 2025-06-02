@@ -5,15 +5,57 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Representa uma matriz de tipo genérico, com n° de linhas, colunas, tipo de dado e um array 2D representando a matriz
+ * <p>
+ * Esta classe oferece métodos para fazer operações aritméticas entre matrizes (como soma, subtração, multiplicação e divisão)
+ * Também oferece métodos de randomização de dados da matriz, verificação de propriedades (como saber se uma matriz é nula ou identidade)
+ * conversão de tipo (Double -> Integer) e mais.
+ * <p>
+ *
+ * @param <T> O tipo dos valores armazenados na matriz
+ * @author Lucas Kluska Donini
+ * @version 2.0.0
+ * @since xx/06/2025
+ */
 public class Matrices<T extends Number> {
-    //atributos
+    // === ATRIBUTOS ===
+
+    /**
+     * Número de linhas da matriz
+     */
     private final int rows;
+
+    /**
+     * Número de colunas da matriz
+     */
     private final int columns;
-    private Class<T> type;
+
+    /**
+     * Tipo de dado da matriz
+     */
+    private final Class<T> type;
+
+    /**
+     * Objeto da classe Random para fazer os métodos de randomização
+     */
     private Random rand = new Random();
+
+    /**
+     * Array 2D contendo os dados da matriz
+     */
     private T[][] data;
 
-    //construtores
+    // === CONSTRUTORES ===
+
+    /**
+     * Método protegido usado em métodos de fábrica para gerar a matriz
+     *
+     * @param data    Array 2D contendo os dados da matriz
+     * @param rows    Número de linhas da matriz
+     * @param columns Número de colunas da matriz
+     * @param type    Tipo de dado da matriz
+     */
     protected Matrices(T[][] data, int rows, int columns, Class<T> type) {
         this.data = data;
         this.rows = rows;
@@ -21,7 +63,16 @@ public class Matrices<T extends Number> {
         this.type = type;
     }
 
-    //fabricas
+    // === FÁBRICAS ===
+
+    /**
+     * Método público que cria uma matriz inferindo o seu tipo a partir de um do primeiro elemento do array recebido
+     *
+     * @param data Array 2D com os dados da matriz
+     * @param <T>  Tipo de dado dos elementos da matriz
+     * @return Matriz com os dados do Array
+     * @throws IllegalArgumentException Se o array estiver vazio ou for irregular
+     */
     @SuppressWarnings("unchecked")
     public static <T extends Number> Matrices<T> from(T[][] data) {
         if (data.length == 0 || data[0].length == 0 || data[0][0] == null) {
@@ -36,7 +87,15 @@ public class Matrices<T extends Number> {
         return new Matrices<>(data, data.length, data[0].length, type);
     }
 
-    //métodos auxiliares protegidos
+    // === MÉTODOS AUXILIARES PROTEGIDOS ===
+
+    /**
+     * Método auxiliar para verificar se um array 2D é regular
+     *
+     * @param m   O array 2D
+     * @param <T> Tipo de dado do array
+     * @return {@code true} se o array for regular, {@code false} caso contrário
+     */
     protected static <T extends Number> boolean isRegular(T[][] m) {
         int cols = m[0].length;
         for (T[] row : m) {
@@ -47,6 +106,15 @@ public class Matrices<T extends Number> {
         return true;
     }
 
+    /**
+     * Converte um valor do tipo {@code Number} para um subtipo específico de {@code Number}.
+     *
+     * @param <T>   O tipo numérico de destino (ex: {@code Integer}, {@code Double}, etc.).
+     * @param value O valor a ser convertido.
+     * @param type  A classe do tipo numérico de destino.
+     * @return O valor convertido para o tipo especificado.
+     * @throws IllegalArgumentException Se o tipo especificado não for suportado.
+     */
     @SuppressWarnings("unchecked")
     protected static <T extends Number> T convert(Number value, Class<T> type) {
         if (type == Integer.class) return (T) Integer.valueOf(value.intValue());
@@ -58,32 +126,60 @@ public class Matrices<T extends Number> {
         throw new IllegalArgumentException("Tipo não suportado: " + type);
     }
 
-    //getters e setters
+    // === GETTERS & SETTERS ===
+
+    /**
+     * Retorna o array contendo os dados da matriz
+     *
+     * @return Os dados da matriz
+     */
     public T[][] getData() {
         return data;
     }
 
+    /**
+     * Define os dados da matriz
+     *
+     * @param data Os dados da matriz
+     */
     public void setData(T[][] data) {
         this.data = data;
     }
 
+    /**
+     * Retorna o número de colunas da matriz
+     *
+     * @return O número de colunas da matriz
+     */
     public int getColumns() {
         return columns;
     }
 
+    /**
+     * Retorna o número de linhas da matriz
+     *
+     * @return O número de linhas da matriz
+     */
     public int getRows() {
         return rows;
     }
 
+    /**
+     * Retorna o tipo de dado da matriz
+     *
+     * @return O tipo de dado da matriz
+     */
     public Class<T> getType() {
         return type;
     }
 
-    public void setType(Class<T> type) {
-        this.type = type;
-    }
+    // === toString() ===
 
-    //toString()
+    /**
+     * Retorna os dados da matriz organizados de forma natural como {@code String}
+     *
+     * @return A {@code String} com os dados da matriz
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -93,15 +189,31 @@ public class Matrices<T extends Number> {
         return sb.toString();
     }
 
-    //randomização
+    // === RANDOMIZAÇÃO ===
+
+    /**
+     * Define uma seed fixa para obter resultados previsíveis na randomização
+     *
+     * @param seed A seed
+     */
     public void setSeed(long seed) {
         rand.setSeed(seed);
     }
 
+    /**
+     * Remove a seed para "desprevisibilizar" os resultados
+     */
     public void unsetSeed() {
         rand = new Random();
     }
 
+    /**
+     * Randomiza os dados da matriz
+     *
+     * @param origin O valor mínimo que se pode conseguir (inclusivo)
+     * @param bound  O valor máximo que se pode conseguir (exclusivo)
+     * @throws UnsupportedOperationException Se o tipo de dado da matriz não for suportado
+     */
     public void randomize(double origin, double bound) {
         long longOrigin = (long) origin;
         long longBound;
@@ -142,19 +254,38 @@ public class Matrices<T extends Number> {
         }
     }
 
+    /**
+     * Randomiza os dados da matriz
+     *
+     * @param bound O valor máximo que se pode conseguir (exclusivo)
+     */
     public void randomize(double bound) {
         randomize(0, bound);
     }
 
+    /**
+     * Randomiza os dados da matriz
+     */
     public void randomize() {
         randomize(0, 10_000);
     }
 
-    //virificação de propriedades
+    // === PROPRIEDADES ===
+
+    /**
+     * Retorna o tamanho da matriz como um array do tipo {@code int}
+     *
+     * @return O tamanho da matriz
+     */
     public int[] size() {
         return new int[]{data.length, data[0].length};
     }
 
+    /**
+     * Verifica se a matriz é uma matriz nula
+     *
+     * @return {@code true} se a matriz for nula, {@code false} caso contrário
+     */
     public boolean isNull() {
         for (T[] i : data) {
             for (T j : i) {
@@ -166,11 +297,23 @@ public class Matrices<T extends Number> {
         return true;
     }
 
+    /**
+     * Verifica se a matriz é uma matriz quadrada
+     *
+     * @return {@code true} se a matriz for quadrada, {@code false} caso contrário
+     */
     public boolean isSquare() {
         return data.length == data[0].length;
     }
 
+    /**
+     * Verifica se a matriz é uma matriz identidade
+     *
+     * @return {@code true} se a matriz for identidade, {@code false} caso contrário
+     */
     public boolean isIdentity() {
+        if (!isSquare()) return false;
+
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
                 if ((i == j && data[i][j].doubleValue() != 1) || (i != j && data[i][j].doubleValue() != 0)) {
@@ -181,6 +324,11 @@ public class Matrices<T extends Number> {
         return true;
     }
 
+    /**
+     * Verifica se a matriz é uma matriz simétrica
+     *
+     * @return {@code true} se a matriz for simétrica, {@code false} caso contrário
+     */
     public boolean isSymmetrical() {
         if (!isSquare()) {
             return false;
@@ -196,7 +344,14 @@ public class Matrices<T extends Number> {
         return true;
     }
 
+    /**
+     * Verifica se a matriz é uma matriz diagonal
+     *
+     * @return {@code true} se a matriz for diagonal, {@code false} caso contrário
+     */
     public boolean isDiagonal() {
+        if (!isSquare()) return false;
+
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
                 if (i != j && data[i][j].doubleValue() != 0) {
@@ -207,21 +362,49 @@ public class Matrices<T extends Number> {
         return true;
     }
 
-    //manipulação das informações
+    // === MANIPULAÇÃO DE DADOS ===
+
+    /**
+     * Retorna o valor presenta na posição (x, y) da matriz
+     *
+     * @param row A coordenada x
+     * @param col A coordenada y
+     * @return O valor na posição (x, y)
+     */
     public T get(int row, int col) {
         return data[row][col];
     }
 
+    /**
+     * Retorna a linha x
+     *
+     * @param row A posição (x) da linha
+     * @return A linha
+     */
     public List<T> get(int row) {
         return Arrays.asList(data[row]);
     }
 
+    /**
+     * Define o valor da posição (x, y) da matriz
+     *
+     * @param row A coordenada x
+     * @param col A coordenada y
+     * @param val O valor
+     */
     public void set(int row, int col, T val) {
         data[row][col] = val;
     }
 
-    //aritmética
-    public void sum(Matrices<T> b) {
+    // === ARITMÉTICA ===
+
+    /**
+     * Soma duas matrizes
+     *
+     * @param b A matriz a ser somada
+     * @throws IllegalArgumentException Se as duas matrizes forem de ordens diferentes
+     */
+    public void plus(Matrices<T> b) {
         if (!Arrays.equals(this.size(), b.size())) {
             throw new IllegalArgumentException("O tamanho das matrizes não coincide");
         }
@@ -233,12 +416,23 @@ public class Matrices<T extends Number> {
         }
     }
 
+    /**
+     * Soma todas as matrizes de um array de {@code Matrices<T>}
+     *
+     * @param arr O array de matrizes
+     */
     public void sumAll(Matrices<T>[] arr) {
         for (Matrices<T> m : arr) {
-            sum(m);
+            plus(m);
         }
     }
 
+    /**
+     * Subtrai duas matrizes
+     *
+     * @param b A matriz a ser subtraída
+     * @throws IllegalArgumentException Se as duas matrizes forem de ordens diferentes
+     */
     public void minus(Matrices<T> b) {
         if (!Arrays.equals(this.size(), b.size())) {
             throw new IllegalArgumentException("O tamanho das matrizes não coincide");
@@ -251,6 +445,22 @@ public class Matrices<T extends Number> {
         }
     }
 
+    /**
+     * Subtrái todas as matrizes de um array de {@code Matrices<T>}
+     *
+     * @param arr O array de matrizes
+     */
+    public void subtractAll(Matrices<T>[] arr) {
+        for (Matrices<T> m : arr) {
+            minus(m);
+        }
+    }
+
+    /**
+     * Múltiplica uma matriz por um número
+     *
+     * @param val O número
+     */
     public void times(T val) {
         for (int i = 0; i < data.length; i++) {
             for (int j = 0; j < data[i].length; j++) {
@@ -259,6 +469,13 @@ public class Matrices<T extends Number> {
         }
     }
 
+    /**
+     * Múltiplica duas matrizes
+     *
+     * @param b A segunda matriz (fator)
+     * @return A nova matriz (produto da múltiplicação)
+     * @throws IllegalArgumentException Se o número de linhas da 2ª matriz for diferente do número de colunas da 1ª
+     */
     @SuppressWarnings("unchecked")
     public Matrices<T> times(Matrices<T> b) {
         if (!(this.size()[1] == b.size()[0])) {
@@ -278,6 +495,13 @@ public class Matrices<T extends Number> {
         return from(result);
     }
 
+    /**
+     * Retorna uma matriz com os dados da primeira mapeados para outro tipo
+     *
+     * @param newType Novo tipo
+     * @param <R>     O tipo de dado da nova matriz
+     * @return Uma matriz com os dados mapeados
+     */
     @SuppressWarnings("unchecked")
     public <R extends Number> Matrices<R> mapTo(Class<R> newType) {
         R[][] newData = (R[][]) Array.newInstance(newType, rows, columns);
@@ -291,6 +515,11 @@ public class Matrices<T extends Number> {
         return new Matrices<>(newData, rows, columns, newType);
     }
 
+    /**
+     * Retorna uma matriz com o valor absoluto dos dados da primeira matriz
+     *
+     * @return A nova matriz
+     */
     public Matrices<T> abs() {
         Matrices<T> result = from(data);
         Number val;
@@ -304,6 +533,11 @@ public class Matrices<T extends Number> {
         return result;
     }
 
+    /**
+     * Retorna a matriz transposta
+     *
+     * @return A matriz transposta
+     */
     @SuppressWarnings("unchecked")
     public Matrices<T> transpose() {
         Object raw = new Number[columns][rows];
