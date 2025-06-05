@@ -16,7 +16,7 @@ public class Out {
      * @return Uma string formatada com a mensagem de erro em vermelho e a dica em amarelo
      */
     public static String erro(String msg, String hint) {
-        return String.format("\n%s\n%s\n", Color.inRed("ERRO: " + msg), Color.inYellow("DICA: " + hint));
+        return String.format("%s\n%s\n", Color.inRed("ERRO: " + msg), Color.inYellow("DICA: " + hint));
     }
 
     /**
@@ -26,7 +26,7 @@ public class Out {
      * @return Uma string formatada com a mensagem de erro em vermelho
      */
     public static String erro(String msg) {
-        return Color.inRed("\nERRO: " + msg);
+        return Color.inRed("ERRO: " + msg + '\n');
     }
 
     /**
@@ -35,7 +35,7 @@ public class Out {
      * @return Uma string formatada com a mensagem "ERRO: entrada inválida" em vermelho
      */
     public static String erro() {
-        return Color.inRed("\nERRO: entrada inválida");
+        return Color.inRed("ERRO: entrada inválida\n");
     }
 
     /**
