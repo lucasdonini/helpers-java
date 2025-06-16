@@ -87,6 +87,70 @@ public class Matrices<T extends Number> {
         return new Matrices<>(data, data.length, data[0].length, type);
     }
 
+    /**
+     * Retorna uma matriz nula com o número de linhas e colunas especificado
+     *
+     * @param type Tipo de dado da matriz
+     * @param rows Número de linhas
+     * @param columns Número de colunas
+     * @return A matriz nula
+     * @param <T> O tipo de dado da matriz
+     * @throws IllegalArgumentException se o número de linhas ou colunas foi <= 0
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends Number> Matrices<T> nullMatrix(Class<T> type, int rows, int columns) {
+        if (Math.max(rows, columns) <= 0) {
+            throw new IllegalArgumentException("Não é possível iniciar Matrizes com menos de uma linha/coluna");
+        }
+        T[][] data = (T[][]) Array.newInstance(type, rows, columns);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                data[i][j] = convert(0, type);
+            }
+        }
+        return new Matrices<>(data, rows, columns, type);
+    }
+
+    /**
+     * Retorna uma matriz identidade da ordem especificada
+     *
+     * @param type Tipo de dado da matriz
+     * @param order Ordem da matriz identidade
+     * @return Matriz identidade
+     * @param <T> Tipo de dado da matriz
+     * @throws IllegalArgumentException se ordem ≤ 0
+     */
+    @SuppressWarnings("unchecked")
+    public static <T extends Number> Matrices<T> identity(Class<T> type, int order) {
+        if (order <= 0) {
+            throw new IllegalArgumentException("Não existem matrizes identidades de ordem <= 0");
+        }
+        T[][] data = (T[][]) Array.newInstance(type, order, order);
+        for (int i = 0; i < order; i++) {
+            for (int j = 0; j < order; j++) {
+                data[i][j] = convert(i == j ? 1 : 0, type);
+            }
+        }
+        return new Matrices<>(data, order, order, type);
+    }
+
+    /**
+     * Copia e retorna a cópia da matriz
+     *
+     * @return A cópia da matriz
+     */
+    @SuppressWarnings("unchecked")
+    public Matrices<T> copy() {
+        T[][] data = (T[][]) Array.newInstance(this.type, this.rows, this.columns);
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
+                data[i][j] = this.data[i][j];
+            }
+        }
+
+        return new Matrices<>(data, this.rows, this.columns, this.type);
+    }
+
     // === MÉTODOS AUXILIARES PROTEGIDOS ===
 
     /**
@@ -399,14 +463,39 @@ public class Matrices<T extends Number> {
     // === ARITMÉTICA ===
 
     /**
+     * Soma duas matrizes e retorna a matriz resultante
+     *
+     * @param b A matriz a ser somada
+     * @throws IllegalArgumentException se as duas matrizes forem de ordens diferentes
+     * @return A matriz resultante
+     */
+    @SuppressWarnings("unchecked")
+    public Matrices<T> sum(Matrices<T> b) {
+        if (!Arrays.equals(this.size(), b.size())) {
+            throw new IllegalArgumentException("Não é possível somar matrizes de ordens diferentes");
+        }
+
+        T[][] newData = (T[][]) Array.newInstance(this.type, this.rows, this.columns);
+
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
+                double valor = this.data[i][j].doubleValue() + b.get(i, j).doubleValue();
+                newData[i][j] = convert(valor, this.type);
+            }
+        }
+
+        return from(newData);
+    }
+
+    /**
      * Soma duas matrizes
      *
      * @param b A matriz a ser somada
      * @throws IllegalArgumentException Se as duas matrizes forem de ordens diferentes
      */
-    public void plus(Matrices<T> b) {
+    public void sumInplace(Matrices<T> b) {
         if (!Arrays.equals(this.size(), b.size())) {
-            throw new IllegalArgumentException("O tamanho das matrizes não coincide");
+            throw new IllegalArgumentException("Não é possível somar matrizes de ordens diferentes");
         }
 
         for (int i = 0; i < data.length; i++) {
@@ -417,23 +506,63 @@ public class Matrices<T extends Number> {
     }
 
     /**
+     * Soma todas as matrizes de um array de matrizes e retorna a matriz resultante
+     *
+     * @param arr Array de matrizes
+     * @return A matriz resultante
+     */
+    @SuppressWarnings("unchecked")
+    public Matrices<T> sumAll(Matrices<T>[] arr) {
+        Matrices<T> auxMatrix = this.copy();
+        for (Matrices<T> m : arr) {
+            auxMatrix.sumInplace(m);
+        }
+        return auxMatrix;
+    }
+
+    /**
      * Soma todas as matrizes de um array de {@code Matrices<T>}
      *
      * @param arr O array de matrizes
      */
-    public void sumAll(Matrices<T>[] arr) {
+    public void sumAllInplace(Matrices<T>[] arr) {
         for (Matrices<T> m : arr) {
-            plus(m);
+            this.sumInplace(m);
         }
     }
 
     /**
-     * Subtrai duas matrizes
+     * Subtrái a matriz b da que chamou o método e retorna a matriz resultante
+     *
+     * @param b Matriz a ser subtraída
+     * @return A matriz resultante
+     * @throws IllegalArgumentException se as matrizes não forem de mesma ordem
+     */
+    @SuppressWarnings("unchecked")
+    public Matrices<T> subtract(Matrices<T> b) {
+        if (!Arrays.equals(this.size(), b.size())) {
+            throw new IllegalArgumentException("Não é possível subtraír matrizes de ordens diferentes");
+        }
+
+        T[][] newData = (T[][]) Array.newInstance(this.type, this.rows, this.columns);
+
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
+                double value = this.data[i][j].doubleValue() - b.get(i, j).doubleValue();
+                newData[i][j] = convert(value, this.type);
+            }
+        }
+
+        return from(newData);
+    }
+
+    /**
+     * Subtrái duas matrizes
      *
      * @param b A matriz a ser subtraída
      * @throws IllegalArgumentException Se as duas matrizes forem de ordens diferentes
      */
-    public void minus(Matrices<T> b) {
+    public void subtractInplace(Matrices<T> b) {
         if (!Arrays.equals(this.size(), b.size())) {
             throw new IllegalArgumentException("O tamanho das matrizes não coincide");
         }
@@ -446,13 +575,28 @@ public class Matrices<T extends Number> {
     }
 
     /**
+     * Subtrái todas as matrizes de um array de matrizes da matriz que chamou o método
+     *
+     * @param arr Array de matrizes
+     * @return A matriz resultante
+     */
+    @SuppressWarnings("unchecked")
+    public Matrices<T> subtractAll(Matrices<T>[] arr) {
+        Matrices<T> auxMatrix = this.copy();
+        for (Matrices<T> m : arr) {
+            auxMatrix.subtractInplace(m);
+        }
+        return auxMatrix;
+    }
+
+    /**
      * Subtrái todas as matrizes de um array de {@code Matrices<T>}
      *
      * @param arr O array de matrizes
      */
-    public void subtractAll(Matrices<T>[] arr) {
+    public void subtractAllInplace(Matrices<T>[] arr) {
         for (Matrices<T> m : arr) {
-            minus(m);
+            subtractInplace(m);
         }
     }
 
