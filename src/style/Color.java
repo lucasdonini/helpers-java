@@ -344,17 +344,4 @@ public class Color {
     public static String negative(String value) {
         return bold(inWhiteBg(inBlack(value)));
     }
-
-    /**
-     * Cria um efeito negativo (fundo branco, texto preto, negrito) para o inteiro fornecido.
-     * Será removida no release v2.0.0
-     *
-     * @param value O inteiro para aplicar o efeito negativo
-     * @return O inteiro como uma string com efeito negativo aplicado
-     */
-    @Deprecated
-    public static String negative(int value) {
-        return bold(inWhiteBg(inBlack(String.valueOf(value))));
-    }
-
 }
