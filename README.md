@@ -44,7 +44,7 @@ Você pode baixar o arquivo `.jar` mais recente na seção **Releases** deste re
 
 ## 📃 Documentação:
 Caso você tenha feito o download do código-fonte, pode ser encontrada diretamente nos arquivos `.java`.  
-Caso contrário, acesse o [link](https://lucasdonini.github.io/helpers-java/docs/index.html) para a página da documentação.
+Caso contrário, acesse o [link](https://lucasdonini.github.io/helpers-java/) para a página da documentação.
 
 ---
 
