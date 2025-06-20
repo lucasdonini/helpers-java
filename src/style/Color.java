@@ -4,6 +4,7 @@ package style;
  * Classe utilitária para manipulação de cores e estilos de texto na saída do console.
  * Fornece constantes e métodos para aplicar cores, estilos e fundos ao texto.
  */
+@Deprecated
 public class Color {
     /**
      * Constantes de cores de texto para saída do console.
